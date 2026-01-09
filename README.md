@@ -99,19 +99,19 @@ The API expects exactly **16 features** in the following order:
 }
 ## Application Logic
 #### Model Loading
--The trained model is loaded once using Pickle
+- The trained model is loaded once using Pickle
 - Prevents repeated retraining
--Improves prediction speed
+- Improves prediction speed
 
 ### Input Validation
 - Checks if JSON input exists
--Ensures features field is present
--Ensures exactly 16 feature values are provided
+- Ensures features field is present
+- Ensures exactly 16 feature values are provided
 
 ### Prediction Process
--Input converted into a Pandas DataFrame with exact feature name.
--Prediction generated using predict()
--Confidence calculated using predict_proba()
+- Input converted into a Pandas DataFrame with exact feature name.
+- Prediction generated using predict()
+- Confidence calculated using predict_proba()
 
 
 
@@ -119,13 +119,13 @@ The API expects exactly **16 features** in the following order:
 
 The application performs an automatic test request:
 
--Executes shortly after server startup
+- Executes shortly after server startup
 
--Sends a sample POST request to /predict
+- Sends a sample POST request to /predict
 
--Prints the response in the terminal
+- Prints the response in the terminal
 
--Confirms the API is working correctly
+- Confirms the API is working correctly
 
 
 ## Tools and Technologies
@@ -137,7 +137,7 @@ The application performs an automatic test request:
 - Joblib
 - Pickle
 - Flask
--Requests
+- Requests
 
 
 ---
@@ -160,12 +160,8 @@ The application performs an automatic test request:
 The Random Forest model learns patterns from historical customer data by combining multiple decision trees. Each tree contributes to the final prediction, improving accuracy and reducing overfitting. The Flask API serves as a bridge between the trained model and external systems.  
 ---
 ## Future Enhancements
--Input schema validation
-
--Model versioning
-
--Authentication and authorization
-
--Cloud deployment
-
--Frontend integration
+- Input schema validation
+- Model versioning
+- Authentication and authorization
+- Cloud deployment
+- Frontend integration
