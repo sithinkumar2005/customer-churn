@@ -1,92 +1,132 @@
-# Machine Learning Classification Project
+# Machine Learning Classification Project with Flask API
 
 ## Introduction
-This project demonstrates a complete machine learning classification workflow implemented in Python using Jupyter Notebook. It covers data preprocessing, model training, performance evaluation, explanation of artificial intelligence logic, and saving trained models for reuse.
+This project implements an end-to-end machine learning classification system and deploys it using a Flask REST API. A trained Random Forest classification model is loaded and exposed through an API endpoint that accepts structured input data and returns predictions along with confidence scores.
 
-The project focuses on comparing a baseline classification model with an ensemble-based model to understand performance differences and practical applications.
+The project demonstrates how a machine learning model can be converted into a real-world, usable API service.
 
 ---
 
 ## Project Objectives
-- Perform data preprocessing and preparation
-- Train and evaluate classification models
-- Compare model performance using evaluation metrics
-- Explain the working logic of machine learning models
-- Save trained models for future usage
+- Train a machine learning classification model
+- Save the trained model for reuse
+- Deploy the model using Flask
+- Accept JSON-based input data
+- Return predictions with confidence values
+- Automatically test the API after startup
 
 ---
 
 ## Project Structure
-
----
-
 ## Dataset Description
 - Supervised classification dataset
-- Contains multiple feature variables and one target variable
-- Dataset exploration and preprocessing performed using Pandas
-- Missing values and data inconsistencies handled before training
+- Customer-related behavioral and demographic features
+- One target variable predicted by the model
+- Data preprocessing and feature engineering performed during training
 
 ---
 
-## Methodology
-
-### Library Usage
-The project uses the following Python libraries:
-- NumPy
-- Pandas
-- Scikit-learn
-- Joblib
-- Pickle
+## Machine Learning Model
+- Algorithm: Random Forest Classifier
+- Model stored using Pickle (`model1.pkl`)
+- Loaded at runtime for fast predictions
+- Supports probability-based confidence output
 
 ---
 
-### Data Preprocessing
-The following preprocessing steps were applied:
-- Dataset loaded into a Pandas DataFrame
-- Missing values checked and handled
-- Categorical data encoded into numerical format
-- Dataset split into training and testing sets
+## Flask API Description
+
+### API Capabilities
+- Loads trained model at application startup
+- Validates incoming request structure
+- Ensures correct number of input features
+- Converts input into a Pandas DataFrame
+- Returns prediction results in JSON format
+- Includes automatic self-testing logic
 
 ---
 
-### Model Training
+## Input Features
+The API expects exactly **16 features** in the following order:
 
-#### Logistic Regression
-- Linear classification algorithm
-- Used as a baseline model
-- Fast training and easy interpretation
-
-#### Random Forest Classifier
-- Ensemble machine learning algorithm
-- Uses multiple decision trees
-- Improves accuracy and reduces overfitting
-
----
-
-### Model Evaluation
-Models were evaluated using:
-- Accuracy
-- Precision
-- Recall
-- F1-score
-
-The Random Forest model achieved superior performance compared to Logistic Regression.
+1. age  
+2. gender  
+3. membership_category  
+4. days_since_last_login  
+5. avg_time_spent  
+6. avg_transaction_value  
+7. avg_frequency_login_days  
+8. points_in_wallet  
+9. used_special_discount  
+10. offer_application_preference  
+11. past_complaint  
+12. complaint_status  
+13. joining_year  
+14. Fiber_Optic  
+15. Mobile_Data  
+16. Wi-Fi  
 
 ---
 
-## AI Logic Explanation
-Machine learning models learn from historical data to identify patterns and relationships between features and target values. Logistic Regression creates a linear decision boundary, while Random Forest combines predictions from multiple decision trees to produce more accurate and stable results.
 
----
+## Post/Predict
+#### Request Body (JSON)
 
-## Model Saving
-The trained Random Forest model was saved using two methods for flexibility and reuse:
-- Joblib
-- Pickle
+{
+  "features": [
+    30,
+    1,
+    2,
+    5,
+    45.5,
+    1200.0,
+    10,
+    300,
+    1,
+    0,
+    0,
+    0,
+    2021,
+    1,
+    0,
+    0
+  ]
+}
+#### Response
+{
+  "prediction": 1,
+  "confidence": 0.87
+}
+## Application Logic
+#### Model Loading
+-The trained model is loaded once using Pickle
+- Prevents repeated retraining
+-Improves prediction speed
 
-Saved models allow predictions to be made without retraining.
+### Input Validation
+- Checks if JSON input exists
+-Ensures features field is present
+-Ensures exactly 16 feature values are provided
 
----
+### Prediction Process
+-Input converted into a Pandas DataFrame with exact feature name.
+-Prediction generated using predict()
+-Confidence calculated using predict_proba()
+
+
+
+## Automatic API Testing
+
+The application performs an automatic test request:
+
+-Executes shortly after server startup
+
+-Sends a sample POST request to /predict
+
+-Prints the response in the terminal
+
+-Confirms the API is working correctly
+
 
 ## Tools and Technologies
 - Python
@@ -96,3 +136,36 @@ Saved models allow predictions to be made without retraining.
 - Scikit-learn
 - Joblib
 - Pickle
+- Flask
+-Requests
+
+
+---
+
+## How to Run the Project
+1. Open Jupyter Notebook
+2. Load the file `Untitled (1).ipynb`
+3. Run all cells sequentially
+
+---
+
+## Future Scope
+- Hyperparameter tuning
+- Cross-validation
+- Feature importance analysis
+- Model deployment using web frameworks
+
+---
+## AI Logic Explanation
+The Random Forest model learns patterns from historical customer data by combining multiple decision trees. Each tree contributes to the final prediction, improving accuracy and reducing overfitting. The Flask API serves as a bridge between the trained model and external systems.  
+---
+## Future Enhancements
+-Input schema validation
+
+-Model versioning
+
+-Authentication and authorization
+
+-Cloud deployment
+
+-Frontend integration
